@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2026 at 07:25 AM
+-- Generation Time: Jun 17, 2026 at 07:29 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -123,8 +123,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `country`, `role`) VALUES
-('0644a087-8120-4f78-88ba-149f11bdefeb', 'User', 'user@gmail.com', '$2b$10$lf7hHwFDNmQhHsPpOtpD9OI966.JscfUpbQ1n6o.Bw1gpMXDmhYtG', 'Indonesia', 'USER'),
-('112ee91e-9db6-4caa-afbb-efcb99f28894', 'Yupri', 'yupriando@gmail.com', '$2b$10$waGwpET.Qq7kXvY.qzzarOxP8aoS30C9F9OlEWxhlMprY.qom9lEm', 'Indonesia', 'ADMIN');
+('0644a087-8120-4f78-88ba-149f11bdefeb', 'User', 'user@gmail.com', '$2b$10$lf7hHwFDNmQhHsPpOtpD9OI966.JscfUpbQ1n6o.Bw1gpMXDmhYtG', 'Indonesia', 'ADMIN');
 
 --
 -- Indexes for dumped tables
