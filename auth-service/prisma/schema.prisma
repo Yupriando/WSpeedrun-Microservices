@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model comments {
+  comment_id String   @id @db.VarChar(36)
+  run_id     String   @db.VarChar(36)
+  user_id    String   @db.VarChar(36)
+  comment    String   @db.VarChar(255)
+  created_at DateTime @db.DateTime(0)
+  runs       runs     @relation(fields: [run_id], references: [run_id], onUpdate: Restrict, map: "comments_ibfk_1")
+
+  @@index([run_id], map: "run_id")
+}
+
+model games {
+  game_id        String           @id @db.VarChar(36)
+  game_name      String           @db.VarChar(255)
+  description    String           @db.VarChar(255)
+  run_categories run_categories[]
+}
+
+model run_categories {
+  run_category_id   String @id @db.VarChar(36)
+  game_id           String @db.VarChar(36)
+  run_category_name String @db.VarChar(255)
+  games             games  @relation(fields: [game_id], references: [game_id], onUpdate: Restrict, map: "run_categories_ibfk_1")
+  runs              runs[]
+
+  @@index([game_id], map: "game_id")
+}
+
+model runs {
+  run_id          String         @id @db.VarChar(36)
+  run_category_id String         @db.VarChar(36)
+  user_id         String         @db.VarChar(36)
+  vod_url         String         @db.VarChar(255)
+  run_duration    BigInt
+  submitted_at    DateTime       @db.DateTime(0)
+  verified_at     DateTime?      @db.DateTime(0)
+  status          String         @db.VarChar(25)
+  comments        comments[]
+  run_categories  run_categories @relation(fields: [run_category_id], references: [run_category_id], onUpdate: Restrict, map: "runs_ibfk_1")
+
+  @@index([run_category_id], map: "run_category_id")
+}
+
+model users {
+  user_id  String  @id @db.VarChar(36)
+  username String  @db.VarChar(55)
+  email    String  @unique(map: "email") @db.VarChar(255)
+  password String  @db.VarChar(255)
+  country  String? @db.VarChar(55)
+  role     String  @db.VarChar(25)
+}
